@@ -1,0 +1,30 @@
+name: Rust
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --verbose --release
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: locker
+          path: target/release/locker.exe
