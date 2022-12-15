@@ -1,0 +1,13 @@
+[workspace]
+members = [
+    "locker",
+    "libs/windows/nbtscanner",
+]
+
+[profile.release]
+lto = true
+strip = "symbols"
+debug = false
+panic = "abort"
+opt-level = "z"
+codegen-units = 1
